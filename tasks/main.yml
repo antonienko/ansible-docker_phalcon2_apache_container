@@ -1,0 +1,18 @@
+---
+- name: Install pip for docker workaround
+  shell: wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py && rm get-pip.py
+
+- name: install docker-py workaround
+  pip: name=docker-py
+
+- name: start webserver container
+  docker:
+    name: "{{ container_name }}"
+    image: antonienko/phalcon2-apache2
+    state: reloaded
+    ports:
+      - "80:80"
+    volumes:
+      - "{{ local_web_folder }}:/var/www"
+    links: "{{linked_containers}}"
+    env: "{{env_vars}}"
