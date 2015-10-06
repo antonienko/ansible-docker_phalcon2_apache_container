@@ -13,6 +13,6 @@
     ports:
       - "80:80"
     volumes:
-      - "{{ local_web_folder }}:/var/www"
+      - "{{ local_web_folder }}:/deploy"
     links: "{{linked_containers}}"
     env: "{{env_vars}}"
